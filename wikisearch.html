@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        input {
+            border-radius: 0.50rem;
+            padding: 5px;
+            margin-bottom:10px;
+        }
+        div{
+            padding:5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>A simple page to search the english wikipedia site</h1>
+    <h5>Please enter the desired searchword below. We will show the top 5 results</h5>
+    <input type="search" id="searchTxt" autocomplete="on" placeholder="Search term" />
+    <input type="button" value="Search" onclick="searchWiki()" />
+    <div id="resultDiv"></div>
+    <script>
+        function showResult(names, links) {
+            var i;
+            console.log(names);
+            for (i = 0; i < names.length; i++) {
+                console.log(names[i] + "- " + links[i]);
+                addResponseLine(names[i], links[i]);
+            }
+        }
+        function addResponseLine(name, url) {
+            document.getElementById("resultDiv").innerHTML += "<div><a href='" + url + "'>" + name + "</a></div>";
+        }
+
+        function searchWiki() {
+            console.log(document.getElementById('searchTxt').value);
+            searchTerm = document.getElementById('searchTxt').value;
+            var url = "https://en.wikipedia.org/w/api.php";
+            var params = {
+                action: "opensearch",
+                search: searchTerm,
+                limit: "5",
+                namespace: "0",
+                format: "json"
+            };
+
+            url = url + "?origin=*";
+            Object.keys(params).forEach(function (key) { url += "&" + key + "=" + params[key]; });
+
+            fetch(url)
+                .then(function (response) { return response.json(); })
+                .then(function (response) {
+                    showResult(response[1], response[3]);
+                })
+                .catch(function (error) { console.log(error); });
+        }
+
+        document.getElementById("searchTxt")
+            .addEventListener("keyup", function (event) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    searchWiki();
+                }
+            });
+    </script>
+</body>
+
+</html>

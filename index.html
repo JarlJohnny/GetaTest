@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        .sidebar .icon {
+            display: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            .sidebar a:not(:first-child) {
+                display: none;
+            }
+
+            .sidebar a.icon {
+                float: right;
+                display: block;
+                 position: absolute;
+                    right: 0;
+                    top: 0;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .sidebar.responsive {
+                position: relative;
+            }
+
+                .sidebar.responsive .icon {
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                }
+
+                .sidebar.responsive a {
+                    float: none;
+                    display: block;
+                    text-align: left;
+                }
+        }
+
+
+        body {
+            margin: 0;
+        }
+        
+
+        .sidebar {
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+            .sidebar a {
+                display: block;
+                color: black;
+                padding: 16px;
+                text-decoration: none;
+            }
+
+                .sidebar a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+                .sidebar a:hover:not(.active) {
+                    background-color: #555;
+                    color: white;
+                }
+
+        div.content {
+            margin-left: 200px;
+            padding: 1px 16px;
+            height: 1000px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            div.content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar" id="myTopnav">
+        <a class="active" href="#home">Home</a>
+        <a href="#operations">Page Operations</a>
+        <a href="#space">Browse space</a>
+        <a href="#content">Add content</a>
+        <a href="javascript:void(0);" class="icon" onclick="openCloseMenu()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+    <div class="content">
+        <h2>Welcome to Our Wiki!</h2>
+        <p>Så etterhvert her at det ikke stod noe i denne oppgaven om at jeg ikke kunne bruke boostrap eller lignende. Så rakk ikke så mye mer en å lage dynamisk sidemeny her.</p>
+        <p>Hadde ønsket å laget denne med bootstrap og col classes hvis jeg ikke hadde forstått oppgaven slik at det kun skulle brukes plain css og javascript. Når det er sagt så er frontend min desidert svakeste side.</p>
+        <p>For mobil ville jeg  fjernet display nav øverst på siden og hatt en nedtrekksmeny med søkefelt for top menyen. Show children, view in hierachy osv ville jeg også hatt som en dropdown meny nederst.</p>
+        <p>Ville også brutt opp i en masterpage med sidemeny og top meny som laster inn content.</p>
+    </div>
+    <script>
+        function openCloseMenu() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "sidebar") {
+                x.className += " responsive";
+            } else {
+                x.className = "sidebar";
+            }
+        }
+    </script>
+</body>
+
+
+</html>
